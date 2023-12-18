@@ -12,18 +12,15 @@ export const server = express()
 
 //routes
 app.get('/', (req, res) => {
-  res.send('Hello NODE API, Wumpini Here hehehehehes')
+  res.send('View Credentials OF Patieients')
 })
 
-app.get('/blog',(req, res) => {
-  res.send('THIS PAGE IS THE BLOG PAGE, and my name is Abdul-Rashid Mubarak Wumpini Scratch That')
+app.get('/patientinfo',(req, res) => {
+  res.send('This Is Where you view the Patients Informmation')
 })
 
 app.post('/product', async(req, res) => {
   try {
-
-
-    
     const product = await Product.create(req.body)
     res.status(200).jsonp(product);
   } catch (error) {
@@ -31,4 +28,17 @@ app.post('/product', async(req, res) => {
       res.status('500').json;{message:error.message}
     }
   }
+})
+
+mongoose.set("strictQuery", false)
+mongoose.
+connect('mongodb+srv://admin:mubarakck@mubarakck.l6zmcmp.mongodb.net/node-API?retryWrites=true&w=majority')
+.then(() =>{
+  console.log('connected to MongoDB')
+  app.listen(3000, ()=> {
+    console.log('Node Api app is running on port 3000')
+  })
+ 
+}).catch(() =>{
+  console.log('error')
 })
